@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Age Calculator</title>
+    <style>
+      body {
+        font-family: "Courier New", Courier, monospace;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        height: 100vh;
+        margin: 0;
+        background: #222222;
+        color: #ffffff;
+        font-weight: 600;
+      }
+      .container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+      .heading {
+        flex: 1;
+        text-align: center;
+        margin: 40px;
+      }
+      .calculator {
+        flex: 1;
+        margin: 20px auto;
+        width: 300px;
+        padding: 30px;
+        border: 1px solid #ccc;
+        border-radius: 20px;
+        box-shadow: 0px 0px 13px 3px;
+      }
+      h1 {
+        font-size: 4rem;
+      }
+      .btn {
+        background: #ffffff;
+        background-image: -webkit-linear-gradient(top, #ffffff, #0d1114);
+        background-image: -moz-linear-gradient(top, #ffffff, #0d1114);
+        background-image: -ms-linear-gradient(top, #ffffff, #0d1114);
+        background-image: -o-linear-gradient(top, #ffffff, #0d1114);
+        background-image: linear-gradient(to bottom, #ffffff, #0d1114);
+        -webkit-border-radius: 28;
+        -moz-border-radius: 28;
+        border-radius: 28px;
+        font-family: Courier New;
+        color: #ffffff;
+        font-size: 12px;
+        padding: 10px 20px 10px 20px;
+        text-decoration: none;
+      }
+
+      .btn:hover {
+        background: #7e7e7e;
+        background-image: -webkit-linear-gradient(top, #7e7e7e, #f1f1f1);
+        background-image: -moz-linear-gradient(top, #7e7e7e, #f1f1f1);
+        background-image: -ms-linear-gradient(top, #7e7e7e, #f1f1f1);
+        background-image: -o-linear-gradient(top, #7e7e7e, #f1f1f1);
+        background-image: linear-gradient(to bottom, #7e7e7e, #f1f1f1);
+        text-decoration: none;
+      }
+      #birthdate {
+        padding: 9px;
+        background: #f1f1f1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="heading">
+        <h1>Age Calculator</h1>
+        <h3>"Discover Your Age in a Click!"</h3>
+      </div>
+      <div class="calculator">
+        <label for="birthdate">Enter your Date Of Birth:</label>
+        <br /><br /><br />
+        <input type="date" id="birthdate" />
+        <br /><br />
+        <button class="btn" onclick="calculateAge()">Calculate Age</button>
+        <p>Your Age is: <span id="result"></span></p>
+      </div>
+    </div>
+
+    <script>
+      function calculateAge() {
+        const birthdate = new Date(document.getElementById("birthdate").value);
+        const currentDate = new Date();
+
+        const years = currentDate.getFullYear() - birthdate.getFullYear();
+        const currentMonth = currentDate.getMonth();
+        const birthMonth = birthdate.getMonth();
+        const months = currentMonth - birthMonth;
+
+        if (
+          months < 0 ||
+          (months === 0 && currentDate.getDate() < birthdate.getDate())
+        ) {
+          years--;
+          months += 12;
+        }
+
+        const days = currentDate.getDate() - birthdate.getDate();
+
+        document.getElementById("result").textContent =
+          years + " years, " + months + " months, " + days + " days";
+      }
+    </script>
+  </body>
+</html>
